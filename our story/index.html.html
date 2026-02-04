@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story 💖</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(180deg, #ffe4ec, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .page {
+      display: none;
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      animation: fadeIn 0.6s ease;
+    }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2, p { text-align: center; }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #ff7aa2;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      margin-top: 12px;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 16px;
+      margin-top: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .box {
+      aspect-ratio: 1/1;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .cats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .cat { font-size: 36px; cursor: pointer; text-align: center; }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .popup.active { display: flex; }
+    .popup-content {
+      background: white;
+      padding: 24px;
+      border-radius: 20px;
+      max-width: 320px;
+      text-align: center;
+      animation: fadeIn 0.4s ease;
+    }
+
+    /* Hidden YouTube audio */
+    iframe { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- Background Music -->
+<iframe src="https://www.youtube.com/embed/UCQ3Kv1hc8k?autoplay=1&loop=1&playlist=UCQ3Kv1hc8k" allow="autoplay"></iframe>
+
+<!-- Popup -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <p id="popupText"></p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+<!-- Page 1 -->
+<div class="page active">
+  <h1>Welcome 💖</h1>
+  <img src="your-image.jpg" />
+  <button onclick="nextPage()">开始</button>
+</div>
+
+<!-- Page 2 (password) -->
+<div class="page">
+  <p>我们第一次单独出去玩是哪一天？</p>
+  <input id="answer" placeholder="例如：1/3/2025" />
+  <button onclick="checkAnswer()">确认</button>
+</div>
+
+<!-- Page 3 -->
+<div class="page">
+  <h2>你答对了 💘</h2>
+  <p>答案是：<strong>1/3/2025</strong></p>
+  <button onclick="nextPage()">继续</button>
+</div>
+
+<!-- Page 4 -->
+<div class="page">
+  <h2>点开我们的回忆</h2>
+  <div class="grid">
+    <div class="box" style="background:#ff6f91" onclick="showPopup('我们第一次单独出去玩是哪一天？')">1</div>
+    <div class="box" style="background:#ff9671" onclick="showPopup('用三个词形容刚认识时的我们')">2</div>
+    <div class="box" style="background:#ffc75f" onclick="showPopup('有一个你想再一起去一次的地方是哪里？')">3</div>
+    <div class="box" style="background:#f9f871" onclick="showPopup('我说过的一句话中，你最记得的是哪一句？')">4</div>
+    <div class="box" style="background:#845ec2" onclick="showPopup('如果要选一天永远不会忘记，那是哪一天？')">5</div>
+    <div class="box" style="background:#4d96ff" onclick="showPopup('你当初对我的第一印象，现在还和以前一样吗？')">6</div>
+  </div>
+  <button onclick="nextPage()">下一页</button>
+</div>
+
+<!-- Pages 5–12 -->
+<div class="page"><p>有时候，什么会让你觉得自己没有被我好好听见？</p><img src="img1.jpg"><button onclick="nextPage()">Next</button></div>
+<div class="page"><p>在这段感情里，什么时候你会觉得特别安心？</p><img src="img2.jpg"><button onclick="nextPage()">Next</button></div>
+<div class="page"><p>异地的时候，我做什么能让你更安心一点？</p><img src="img3.jpg"><button onclick="nextPage()">Next</button></div>
+<div class="page"><p>我们吵架时，什么事情最容易让你难过？</p><img src="img4.jpg"><button onclick="nextPage()">Next</button></div>
+<div class="page"><p>我有没有说过哪句话，让你一直记在心里？</p><img src="img5.jpg"><button onclick="nextPage()">Next</button></div>
+<div class="page"><p>有矛盾的时候，你希望我在哪方面做得更好？</p><img src="img6.jpg"><button onclick="nextPage()">Next</button></div>
+<div class="page"><p>异地恋中，哪个瞬间最让你觉得辛苦？</p><img src="img7.jpg"><button onclick="nextPage()">Next</button></div>
+<div class="page"><p>自从爱上我以后，你觉得自己有哪些改变？</p><img src="img8.jpg"><button onclick="nextPage()">Next</button></div>
+
+<!-- Page 13 -->
+<div class="page">
+  <h2>点小猫 🐱</h2>
+  <div class="cats">
+    <div class="cat" onclick="showPopup('有没有什么事情，是你以前觉得自己做不到，但却为了我去尝试的？')">🐱</div>
+    <div class="cat" onclick="showPopup('有没有什么事情，即使很爱，也让你觉得难以接受？')">🐱</div>
+    <div class="cat" onclick="showPopup('如果有一天我离开了，你最舍不得、最会想念的是什么？')">🐱</div>
+    <div class="cat" onclick="showPopup('当你最脆弱的时候，最希望听到我对你说哪一句话？')">🐱</div>
+    <div class="cat" onclick="showPopup('有没有哪一点是我曾经让你受伤，却一直没有说出口的？')">🐱</div>
+    <div class="cat" onclick="showPopup('在这段感情里，什么事情让你感到骄傲？')">🐱</div>
+    <div class="cat" onclick="showPopup('在接下来的一年里，有什么是你想为我做得更好的？')">🐱</div>
+  </div>
+  <button onclick="nextPage()">最后一页</button>
+</div>
+
+<!-- Page 14 -->
+<div class="page">
+  <h2>💌</h2>
+  <input type="file" accept="image/*" />
+</div>
+
+<script>
+  let current = 0;
+  const pages = document.querySelectorAll('.page');
+
+  function nextPage() {
+    pages[current].classList.remove('active');
+    current++;
+    pages[current].classList.add('active');
+  }
+
+  function checkAnswer() {
+    const val = document.getElementById('answer').value.trim();
+    if (val === '1/3/2025') {
+      nextPage();
+    } else {
+      showPopup('再一次');
+    }
+  }
+
+  function showPopup(text) {
+    document.getElementById('popupText').innerText = text;
+    document.getElementById('popup').classList.add('active');
+  }
+
+  function closePopup() {
+    document.getElementById('popup').classList.remove('active');
+  }
+</script>
+
+</body>
+</html>
